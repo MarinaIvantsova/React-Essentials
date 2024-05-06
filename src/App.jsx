@@ -1,8 +1,6 @@
-import { useState } from 'react'
-import { EXAMPLES, CORE_CONCEPTS } from './data-with-examples'
-import CoreConcept from './CoreConcept/CoreConcept'
+import CoreConcepts from './CoreConcepts/CoreConcepts'
+import Examples from './Examples/Examples'
 
-import TabButton from './TabButton/TabButton'
 function Header() {
   return (
     <header>
@@ -13,53 +11,14 @@ function Header() {
   )
 }
 function App() {
-  const [selectedTopic, setselectedTopic] = useState()
-
-  function handleSelect(content) {
-    setselectedTopic(content)
-  }
-
   return (
-    <div>
+    <>
       <Header />
       <main>
-        <section id="core-concepts">
-          <h2>Core concepts</h2>
-          <ul>
-            {CORE_CONCEPTS.map((conceptItem) => (
-              <CoreConcept key={conceptItem.title} {...conceptItem}></CoreConcept>
-            ))}
-          </ul>
-        </section>
-        <section id="examples">
-          <h2>Examples</h2>
-          <menu>
-            <TabButton isSelected={selectedTopic === 'components'} onSelected={() => handleSelect('components')}>
-              {EXAMPLES.components.title}
-            </TabButton>
-            <TabButton isSelected={selectedTopic === 'jsx'} onSelected={() => handleSelect('jsx')}>
-              {EXAMPLES.jsx.title}
-            </TabButton>
-            <TabButton isSelected={selectedTopic === 'props'} onSelected={() => handleSelect('props')}>
-              {EXAMPLES.props.title}
-            </TabButton>
-            <TabButton isSelected={selectedTopic === 'state'} onSelected={() => handleSelect('state')}>
-              {EXAMPLES.state.title}
-            </TabButton>
-          </menu>
-          {!selectedTopic && <p>Please select a topic</p>}
-          {selectedTopic && (
-            <div id="tab-content">
-              <h3>{EXAMPLES[selectedTopic].title}</h3>
-              <p>{EXAMPLES[selectedTopic].description}</p>
-              <pre>
-                <code>{EXAMPLES[selectedTopic].code}</code>
-              </pre>
-            </div>
-          )}
-        </section>
+        <CoreConcepts />
+        <Examples />
       </main>
-    </div>
+    </>
   )
 }
 
